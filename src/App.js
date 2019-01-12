@@ -18,7 +18,7 @@ let fakeServerData = {
         ]
       },
       {
-        name: "My Favourites",
+        name: "Top 50 Songs",
         songs: [
           { name: "Be Humble", duration: 1200 },
           { name: "Thank You, Next", duration: 1300 },
@@ -26,7 +26,7 @@ let fakeServerData = {
         ]
       },
       {
-        name: "My Favourites",
+        name: "Hot Hits",
         songs: [
           { name: "Be Humble", duration: 1200 },
           { name: "Thank You, Next", duration: 1300 },
@@ -34,7 +34,7 @@ let fakeServerData = {
         ]
       },
       {
-        name: "My Favourites",
+        name: "Recommended",
         songs: [
           { name: "Be Humble", duration: 1200 },
           { name: "Thank You, Next", duration: 1300 },
@@ -44,6 +44,7 @@ let fakeServerData = {
     ]
   }
 };
+
 class MusicCounter extends Component {
   render() {
     return (
@@ -94,6 +95,7 @@ class Filter extends Component {
 
 class Playlist extends Component {
   render() {
+    let playlist = this.props.playlist;
     return (
       <div
         style={{
@@ -103,11 +105,13 @@ class Playlist extends Component {
         }}
       >
         <img />
-        <h3>Playlist Name</h3>
+        {/* Gets the name attribute from props */}
+        <h3>{playlist.name}</h3>
         <ul>
-          <li>Song1</li>
-          <li>Song2</li>
-          <li>Song3</li>
+          {/* Mapping Function that maps the song in each playlist song object - and populates the html list */}
+          {playlist.songs.map(song => (
+            <li>{song.name}</li>
+          ))}
         </ul>
       </div>
     );
@@ -140,9 +144,11 @@ class App extends Component {
             <MusicCounter playlist={this.state.serverData.user.playlist} />
             <Hours playlist={this.state.serverData.user.playlist} />
             <Filter />
-            <Playlist />
-            <Playlist />
-            <Playlist />
+            {/* grabs server data from current state */}
+            {/* Map Transforms the playlist array into a new Object */}
+            {this.state.serverData.user.playlist.map(playlist => (
+              <Playlist playlist={playlist} />
+            ))}
           </div>
         ) : (
           <h1>Please Wait...</h1>
