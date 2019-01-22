@@ -10,7 +10,7 @@ let fakeServerData = {
     name: "Dylan",
     playlist: [
       {
-        name: "My Favourites",
+        name: "Weekly",
         songs: [
           { name: "Be Humble", duration: 1200 },
           { name: "Thank You, Next", duration: 1300 },
@@ -86,7 +86,11 @@ class Filter extends Component {
     return (
       <div>
         <img />
-        <input type="text" />
+        {/* When a Filter key is pressed down - Do This */}
+        <input
+          type="text"
+          onKeyUp={event => this.props.onTextChange(event.target.value)}
+        />
         Filter
       </div>
     );
@@ -121,14 +125,14 @@ class Playlist extends Component {
 class App extends Component {
   constructor() {
     super();
-    this.state = { serverData: {} };
+    this.state = { serverData: {}, filterString: "" };
   }
   // Once seconds have passed, execute the function
   componentDidMount() {
     setTimeout(() => {
       // this applys to the App Components state - serverData
       this.setState({ serverData: fakeServerData });
-    }, 3000);
+    }, 2000);
   }
   render() {
     return (
@@ -137,20 +141,31 @@ class App extends Component {
         {this.state.serverData.user ? (
           <div>
             <h1>
+              {/* Grabs the user Name */}
               {this.state.serverData.user.name}
               's Playlists
             </h1>
 
             <MusicCounter playlist={this.state.serverData.user.playlist} />
             <Hours playlist={this.state.serverData.user.playlist} />
-            <Filter />
+            <Filter
+              onTextChange={text => this.setState({ filterString: text })}
+            />
             {/* grabs server data from current state */}
             {/* Map Transforms the playlist array into a new Object */}
-            {this.state.serverData.user.playlist.map(playlist => (
-              <Playlist playlist={playlist} />
-            ))}
+            {/* Filter accepts a function in this case the playlists -if you have playlist name check...*/}
+            {this.state.serverData.user.playlist
+              .filter(playlist =>
+                playlist.name
+                  .toLowerCase()
+                  .includes(this.state.filterString.toLowerCase())
+              )
+              .map(playlist => (
+                <Playlist playlist={playlist} />
+              ))}
           </div>
         ) : (
+          // prints please wait when screen is loaded
           <h1>Please Wait...</h1>
         )}
       </div>
