@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 // -----MusicCounter Class-----
 class MusicCounter extends React.Component {

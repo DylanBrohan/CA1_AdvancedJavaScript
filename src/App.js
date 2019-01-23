@@ -6,6 +6,9 @@ import Playlist from "./componants/Playlist";
 import Filter from "./componants/Filter";
 import MusicCounter from "./componants/MusicCounter";
 
+import axios from "axios";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 let defaultTextColor = "#000";
 
 // Dumby Testing Data
@@ -55,11 +58,28 @@ class App extends Component {
     super(props);
     this.state = { serverData: {}, filterString: "" };
   }
-  // Once seconds have passed, execute the function
   componentDidMount() {
+    const access_token = axios
+      .get("https://api.spotify.com/v1/me", {
+        headers: {
+          Authorization: "Bearer" + access_token
+        }
+      })
+      .then(response => {
+        // Return the full details of the user.
+        console.log(response);
+        this.setState({ serverData: response.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    // Once seconds have passed, execute the function
     setTimeout(() => {
       // this applys to the App Components state - serverData
-      this.setState({ serverData: fakeServerData });
+      this.setState({
+        serverData: fakeServerData
+      });
     }, 2000);
   }
   render() {
