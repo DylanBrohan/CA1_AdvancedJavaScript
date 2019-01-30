@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-let defaultTextColor = "#000";
-
 class Track extends Component {
   render() {
     /*
-          Here, what's happening is that the artists variable is storing the passed in
-          array. From there, there are two scenarios:
+          The artists variable is storing the passed in array. From there, there are two scenarios:
     
             1. If there are more than one artist, reinitialise to be an empty string.
                Then, loop through the array and concatenate to the artists string.
@@ -35,19 +32,22 @@ class Track extends Component {
     }
 
     return (
+      // In this Return the Track data is displayed and styled
       <div className="card ">
         <div className="card-body">
           <h6 className="card-text">Artist: {artists}</h6>
-          <h7 class="card-subtitle mb-2 text-muted">
+          <h7 className="card-subtitle mb-2 text-muted">
             Track Name: {this.props.name}
           </h7>
           <br />
-          <h7 class="card-subtitle mb-2 text-muted">
+          <h7 className="card-subtitle mb-2 text-muted">
             Popularity Rating(0-100): {this.props.popularity}
           </h7>
           <br />
           <br />
-          <h7 class="card-subtitle mb-2 text-muted">Type: {this.props.type}</h7>
+          <h7 className="card-subtitle mb-2 text-muted">
+            Type: {this.props.type}
+          </h7>
         </div>
       </div>
     );
