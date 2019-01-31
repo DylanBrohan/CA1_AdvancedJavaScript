@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Router, Route, Link } from "react-router-dom";
+// import TrackDetails from "./componants/TrackDetails";
 
 class Track extends Component {
   render() {
@@ -12,8 +14,7 @@ class Track extends Component {
                just add the name of the artist.
             2. If there's only one artist, just reinitalise the variable to be that
                artist's name. The [0] is there to point to the first element of the
-               array, in case you're wondering.
-    
+               array, in case you're wondering.  
           After storing the artists in the string, call the variable inside the
           return.
         */
@@ -32,6 +33,7 @@ class Track extends Component {
     }
 
     return (
+      // <Router>
       // In this Return the Track data is displayed and styled
       <div className="card ">
         <div className="card-body">
@@ -44,10 +46,20 @@ class Track extends Component {
             Popularity Rating(0-100): {this.props.popularity}
           </h7>
           <br />
-          <br />
           <h7 className="card-subtitle mb-2 text-muted">
             Type: {this.props.type}
           </h7>
+          <br />
+          <br />
+          <button className="btn btn-secondary">
+            Details On: {this.props.name}
+          </button>
+
+          {/* <Link onClick={this.handleClick} className="btn btn-secondary">
+              Details On: {this.props.name}
+            </Link> */}
+
+          {/* <Route path="/trackDetails" component={TrackDetails} /> */}
         </div>
       </div>
     );

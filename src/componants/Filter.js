@@ -13,6 +13,7 @@ class Filter extends React.Component {
         <input
           type="text"
           onKeyUp={event => this.props.onTextChange(event.target.value)}
+          placeholder={"e.g. My Playlist"}
         />
         Filter
       </div>

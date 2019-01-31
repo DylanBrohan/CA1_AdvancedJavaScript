@@ -18,7 +18,8 @@ var client_secret = "904cd4801c6d4924b273718f617f99ac"; // Your secret
 // );
 // your application requests authorization
 var authOptions = {
-  url: "https://accounts.spotify.com/api/token",
+  url:
+    "https://cors-anywhere.herokuapp.com/https://accounts.spotify.com/api/token",
   headers: {
     Authorization:
       "Basic " + new Buffer(client_id + ":" + client_secret).toString("base64")
@@ -43,7 +44,3 @@ request.post(authOptions, function(error, response, body) {
     });
   }
 });
-// Send a POST request
-// axios(authOptions).then(response){
-//     console.log(response);
-// }

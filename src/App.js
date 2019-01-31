@@ -10,13 +10,17 @@ import Footer from "./componants/Footer";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from "axios";
 
 // ---Access Token---
 // Needs to be refreshed every 3600 miliseconds
-const access_token =
-  "BQDjCsoCXPNj4Mnos9VS0un5fjS01Ox9B5cH5-p1K_n_xir-dWJKinHFltmcYWB2n4bI2SuhHy0ZFQaiIL7-s-Be_azBcfcmwefaRqz-3L_kxpTirr82VGG8bJMpX8_eDGfKB8I71u23y_c";
+// const access_token =
+//   "BQBU4YgOnXwOfaO7n8hjFW7TObb2Nx91Gbd_0yhnEFV-2VUjYP-6Y59Niii8Btf-t31Bx3XkVsW0H0GdnHjsekm4qEHZqqnaKz1NBmax_3UYFkEQu73mH9dKkHqbwdWL8JwUDoO0Tk91V2I";
+
+// Get the URL - splits the access token and returns  it
+const url = window.location.href;
+const url2 = new URL(url);
+const access_token = url2.hash.split("&")[0].slice(14);
 
 // -----App Class-----
 class App extends Component {
@@ -84,9 +88,7 @@ class App extends Component {
     return (
       // In this return I have pulled in all the componants
       <div className="App">
-        {/* NavBar Class */}
         <Navbar />
-
         {/* grabs server data from current state */}
         {this.state.serverData.display_name ? (
           <div>
@@ -108,7 +110,7 @@ class App extends Component {
             {playlistData}
           </div>
         ) : (
-          <h1>Please Wait...</h1>
+          <strong>Loading...</strong>
         ) // prints please wait when screen is loaded
         }
         {/* Footer Class */}

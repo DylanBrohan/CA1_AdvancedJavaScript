@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Navbar extends Component {
   // Using Bootstrap to create a Navigation bar
@@ -6,9 +7,9 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
-          <a className="navbar-brand" href="/">
+          {/* <Link to="/" className="navbar-brand" href="/">
             My Music
-          </a>
+          </Link> */}
           <button
             className="navbar-toggler"
             type="button"

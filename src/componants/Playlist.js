@@ -4,6 +4,9 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Track from "./Tracks";
 
+// import trackDetails from "./TrackDetails";
+// import { BrowserRouter, Route, Link } from "react-router-dom";
+
 class Playlist extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +31,7 @@ class Playlist extends Component {
       .get(
         `https://api.spotify.com/v1/playlists/${
           this.props.id
-        }/tracks?offset=0&limit=15`,
+        }/tracks?offset=0&limit=10`,
         {
           headers: {
             Authorization: "Bearer " + this.props.access_token
@@ -69,7 +72,7 @@ class Playlist extends Component {
           width: "30%",
           display: "inline-block",
           paddingTop: "10px",
-          height: "40%"
+          height: "20%"
         }}
       >
         <div className="card">
@@ -82,6 +85,7 @@ class Playlist extends Component {
               src={this.props.img}
               alt="..."
             />
+
             <p className="card-text  text-left" style={{}}>
               {trackRender}
             </p>
