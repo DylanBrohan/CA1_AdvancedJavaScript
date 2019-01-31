@@ -1,5 +1,4 @@
 import React from "react";
-
 // -----Filter Class-----
 class Filter extends React.Component {
   constructor(props) {
@@ -8,14 +7,14 @@ class Filter extends React.Component {
   render() {
     return (
       <div>
-        <img />
-        {/* When a Filter key is pressed down - Do This */}
         <input
+          name={this.props.name}
+          value={this.props.value}
+          onChange={this.props.handleChange}
+          className="input"
           type="text"
-          onKeyUp={event => this.props.onTextChange(event.target.value)}
-          placeholder={"e.g. My Playlist"}
+          placeholder={this.props.placeholder}
         />
-        Filter
       </div>
     );
   }
