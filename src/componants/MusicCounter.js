@@ -2,14 +2,11 @@ import React from "react";
 
 // -----MusicCounter Class-----
 class MusicCounter extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div style={{ width: "40%", display: "inline-block" }}>
         <h2 style={{ color: "#defaultTextColor" }}>
-          {this.props.playlist.length}Playlist
+          You Have: {this.props.playlist.length} Playlist's
         </h2>
       </div>
     );

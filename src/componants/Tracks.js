@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Router, Route, Link } from "react-router-dom";
-// import TrackDetails from "./componants/TrackDetails";
 
 class Track extends Component {
   render() {
