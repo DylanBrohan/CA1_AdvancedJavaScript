@@ -15,7 +15,6 @@ import axios from "axios";
 // ---Access Token---
 // Needs to be refreshed every 3600 miliseconds
 // const access_token =
-//   "BQBU4YgOnXwOfaO7n8hjFW7TObb2Nx91Gbd_0yhnEFV-2VUjYP-6Y59Niii8Btf-t31Bx3XkVsW0H0GdnHjsekm4qEHZqqnaKz1NBmax_3UYFkEQu73mH9dKkHqbwdWL8JwUDoO0Tk91V2I";
 
 // Get the URL - splits the access token and returns  it
 const url = window.location.href;
@@ -29,9 +28,11 @@ class App extends Component {
     this.state = {
       // List of empty arrays
       serverData: [],
-      filterString: "",
+      searchText: "",
       playlistData: []
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -64,18 +65,24 @@ class App extends Component {
         console.log(err);
       });
   }
+
+  handleChange(event) {
+    // handle both of the <select> UI elements
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({ [name]: value });
+    console.log(name);
+  }
+
+  handleClick(event) {
+    // handle the toggle <button>
+    const name = event.target.name;
+    this.setState(prevState => ({ [name]: !prevState[name] }));
+  }
   // Render for playlist Data and playlist info
   render() {
-    const playlistData = this.state.playlistData.map(pr => (
-      <Playlist
-        key={pr.id}
-        access_token={access_token}
-        id={pr.id}
-        name={pr.name}
-        img={pr.images[0].url}
-      />
-    ));
-
     let playlistsRender =
       this.state.playlistData.user && this.state.playlistData.user.playlist
         ? this.state.playlistData.user.playlistData.filter(playlistData =>
@@ -84,6 +91,15 @@ class App extends Component {
               .includes(this.state.filterString.toLowerCase())
           )
         : [];
+    const playlistData = playlistsRender.map(pr => (
+      <Playlist
+        key={pr.id}
+        access_token={access_token}
+        id={pr.id}
+        name={pr.name}
+        img={pr.images[0].url}
+      />
+    ));
 
     return (
       // In this return I have pulled in all the componants
@@ -99,10 +115,19 @@ class App extends Component {
             </h1>
             <MusicCounter playlist={playlistsRender} />
             <Hours playlist={playlistsRender} />
-            {/* Filter accepts a function in this case the playlists -if you have playlist name check...*/}
+
             <Filter
-              onTextChange={text => this.setState({ filterString: text })}
+              name="searchText"
+              label="Search by name"
+              value={this.state.searchText}
+              handleChange={this.handleChange.bind(this)}
+              placeholder={"e.g. My Favourites"}
             />
+
+            {/* Filter accepts a function in this case the playlists -if you have playlist name check...*/}
+            {/* <Filter
+              onTextChange={text => this.setState({ filterString: text })}
+            /> */}
             {/* Map Transforms the playlist array into a new Object */}
             {playlistsRender.map(playlist => (
               <Playlist playlist={playlist} />
