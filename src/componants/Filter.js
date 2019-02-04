@@ -4,6 +4,7 @@ class Filter extends React.Component {
   render() {
     return (
       <div>
+        {/* Sets the prop states for the filter  Input Field */}
         <input
           name={this.props.name}
           value={this.props.value}

@@ -54,8 +54,8 @@ class Track extends Component {
           </button>
 
           {/* <Link onClick={this.handleClick} className="btn btn-secondary">
-              Details On: {this.props.name}
-            </Link> */}
+            Details On: {this.props.name}
+          </Link> */}
 
           {/* <Route path="/trackDetails" component={TrackDetails} /> */}
         </div>

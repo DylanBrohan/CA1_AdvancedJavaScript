@@ -6,6 +6,7 @@ class MusicCounter extends React.Component {
     return (
       <div style={{ width: "40%", display: "inline-block" }}>
         <h2 style={{ color: "#defaultTextColor" }}>
+          {/* Gets length of playlists and displays */}
           You Have: {this.props.playlist.length} Playlist's
         </h2>
       </div>
