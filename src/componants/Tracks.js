@@ -36,7 +36,6 @@ class Track extends Component {
       <div className="card ">
         <div className="card-body">
           <h6 className="card-text">Artist: {artists}</h6>
-
           <h7 className="card-subtitle mb-2 text-muted">
             Track Name: {this.props.name}
           </h7>
