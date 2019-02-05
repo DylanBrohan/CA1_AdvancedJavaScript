@@ -3,11 +3,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import Track from "./Tracks";
 
-// import trackDetails from "./TrackDetails";
-// import { BrowserRouter, Route, Link } from "react-router-dom";
-
+// Styling
 import "bootstrap/dist/css/bootstrap.min.css";
 
+//  ---Playlist Component---
 class Playlist extends Component {
   constructor(props) {
     super(props);
@@ -23,10 +22,7 @@ class Playlist extends Component {
       axios request below.
 
       I've passed in the access token as well.
-      This is done
-      by declaring and initialising the variable outside the class in App.js.
-      Again, you'll need a way for the program to generate a new token for when
-      the old one expires.
+   
     */
     axios
       .get(

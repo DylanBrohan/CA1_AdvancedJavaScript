@@ -8,9 +8,6 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
-          {/* <Link to="/" className="navbar-brand" href="/">
-            My Music
-          </Link> */}
           <button
             className="navbar-toggler"
             type="button"

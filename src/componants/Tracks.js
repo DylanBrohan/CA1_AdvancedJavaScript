@@ -12,9 +12,7 @@ class Track extends Component {
                just add the name of the artist.
             2. If there's only one artist, just reinitalise the variable to be that
                artist's name. The [0] is there to point to the first element of the
-               array, in case you're wondering.
-          After storing the artists in the string, call the variable inside the
-          return.
+               array.
         */
     let artists = this.props.artists;
     if (artists.length > 0) {
@@ -31,7 +29,6 @@ class Track extends Component {
     }
 
     return (
-      // <Router>
       // In this Return the Track data is displayed and styled
       <div className="card ">
         <div className="card-body">

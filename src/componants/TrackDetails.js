@@ -1,10 +1,16 @@
 import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+
+// Components
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
+// Axios Pull
 import axios from "axios";
 
+// Styling
+import "bootstrap/dist/css/bootstrap.min.css";
+
+// ---TrackDetails Component---
 class TrackDetails extends Component {
   constructor(props) {
     super(props);

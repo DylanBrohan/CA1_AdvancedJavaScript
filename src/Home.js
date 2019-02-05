@@ -1,6 +1,7 @@
 // Imports to the REACT application
 import React, { Component } from "react";
 import "./App.css";
+
 // ---Components---
 import Playlist from "./componants/Playlist";
 import Filter from "./componants/Filter";
@@ -10,10 +11,14 @@ import Footer from "./componants/Footer";
 import Public from "./componants/Public";
 import Spinner from "./componants/Spinner";
 
-// Bootstrap & Axios
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+// Axios
 import axios from "axios";
+
+// Styling
+import "bootstrap/dist/css/bootstrap.min.css";
+
+// Main Routes File
+import "./App.css";
 
 // ---Access Token---
 // Needs to be refreshed every 3600 miliseconds
@@ -163,8 +168,7 @@ class Home extends Component {
             <p>Please Get Auth Key</p>
             <Spinner />
           </div>
-        ) // prints please wait when screen is loaded
-        }
+        )}
         {/* Footer Component */}
         <Footer />
       </div>
