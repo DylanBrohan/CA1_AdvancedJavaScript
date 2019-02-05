@@ -1,5 +1,5 @@
 import React from "react";
-// Public DropDown Button
+// Public DropDown Button Component
 class Public extends React.Component {
   render() {
     const options = this.props.options.map(item => {

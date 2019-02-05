@@ -1,59 +1,108 @@
-// import React, { Component } from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import Tracks from "./componants/Tracks";
-// import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
-// class TrackDetails extends Component {
-//   render() {
-//     //     /*
-//     //               The artists variable is storing the passed in array. From there, there are two scenarios:
+import axios from "axios";
 
-//     //                 1. If there are more than one artist, reinitialise to be an empty string.
-//     //                    Then, loop through the array and concatenate to the artists string.
-//     //                    If there are more artists to loop through, append a comma. If not,
-//     //                    just add the name of the artist.
-//     //                 2. If there's only one artist, just reinitalise the variable to be that
-//     //                    artist's name. The [0] is there to point to the first element of the
-//     //                    array, in case you're wondering.
+class TrackDetails extends Component {
+  constructor(props) {
+    super(props);
 
-//     //               After storing the artists in the string, call the variable inside the
-//     //               return.
-//     //             */
-//     let artists = this.props.artists;
-//     if (artists.length > 0) {
-//       artists = "";
-//       for (let i = 0; i < this.props.artists.length; i++) {
-//         if (i + 1 !== this.props.artists.length) {
-//           artists = artists.concat(this.props.artists[i].name + ", ");
-//         } else {
-//           artists = artists.concat(this.props.artists[i].name);
-//         }
-//       }
-//     } else {
-//       artists = this.props.artists[0].name;
-//     }
+    this.state = {
+      trackDetails: [],
+      id: this.props.location.hash
+        .substr(1)
+        .split("&")[0]
+        .slice(),
+      token: this.props.location.hash
+        .substr(24)
+        .split("&")[0]
+        .slice(),
 
-//     return (
-//       // In this Return the Track data is displayed and styled
-//       <div className="card ">
-//         <div className="card-body">
-//           <h6 className="card-text">Artist: {artists}</h6>
-//           <h7 className="card-subtitle mb-2 text-muted">
-//             Track Name: {this.props.name}
-//           </h7>
-//           <br />
-//           <h7 className="card-subtitle mb-2 text-muted">
-//             Popularity Rating(0-100): {this.props.popularity}
-//           </h7>
-//           <br />
-//           <br />
-//           <h7 className="card-subtitle mb-2 text-muted">
-//             Type: {this.props.type}
-//           </h7>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
+      loading: false
+    };
+  }
 
-// export default TrackDetails;
+  componentDidMount() {
+    axios
+      .get(`https://api.spotify.com/v1/tracks/${this.state.id}`, {
+        headers: {
+          // Gets the Authorization Token
+          Authorization: "Bearer " + this.state.token
+        }
+      })
+      // Then Promise - serverData is then populated with the data
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          trackDetails: res.data,
+          loading: true
+        });
+      })
+      // Else give back and error
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  render() {
+    let artists = this.state.trackDetails.artists;
+    if (this.state.loading) {
+      if (artists) {
+        artists = "";
+        for (let i = 0; i < this.state.trackDetails.artists.length; i++) {
+          if (i + 1 !== this.state.trackDetails.artists.length) {
+            artists = artists.concat(
+              this.state.trackDetails.artists[i].name + ", "
+            );
+          } else {
+            artists = artists.concat(this.state.trackDetails.artists[i].name);
+          }
+        }
+      } else {
+        artists = this.state.trackDetails.artists[0].name;
+      }
+    }
+    let playlistImg = this.props.location.hash.substr(
+      this.state.id.length + this.state.token.length + 3
+    );
+    console.log(playlistImg);
+    return (
+      // In this Return the Track data is displayed and styled
+      <div className="App">
+        <Navbar />
+
+        <div className="card " style={{}}>
+          <div className="card-img " style={{ width: "" }}>
+            <img
+              className="rounded-circle"
+              src={playlistImg}
+              style={{}}
+              alt="..."
+            />
+          </div>
+          <div className="card-body" style={{ width: "" }}>
+            <h6 className="card-text">Artist: {artists}</h6>
+            <h7 className="card-subtitle mb-2 text-muted">
+              Track Name: {this.state.trackDetails.name}
+            </h7>
+            <br />
+            <h7 className="card-subtitle mb-2 text-muted">
+              Popularity Rating(0-100): {this.state.trackDetails.popularity}
+            </h7>
+            <br />
+            <br />
+            <h7 className="card-subtitle mb-2 text-muted">
+              Type: {this.state.trackDetails.type}
+            </h7>
+          </div>
+        </div>
+
+        <Footer />
+      </div>
+    );
+  }
+}
+
+export default TrackDetails;

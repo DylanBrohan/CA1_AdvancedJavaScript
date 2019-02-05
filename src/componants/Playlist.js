@@ -66,6 +66,8 @@ class Playlist extends Component {
           album={t.track.album.name}
           popularity={t.track.popularity}
           type={t.track.type}
+          access_token={this.props.access_token}
+          playlistImg={this.props.img}
         />
       );
     });

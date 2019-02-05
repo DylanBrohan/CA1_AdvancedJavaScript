@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import TrackDetails from "./componants/TrackDetails";
 
 import Home from "./Home";
 // ---Main Router File---
@@ -11,7 +12,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/callback" component={Home} />
-          {/* <Route exact path="/trackDetails" component={TrackDetails} /> */}
+          <Route exact path="/trackDetails" component={TrackDetails} />
         </Switch>
       </Router>
     );

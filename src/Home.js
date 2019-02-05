@@ -9,7 +9,6 @@ import Navbar from "./componants/Navbar";
 import Footer from "./componants/Footer";
 import Public from "./componants/Public";
 import Spinner from "./componants/Spinner";
-// import TrackDetails from "./componants/TrackDetails";
 
 // Bootstrap & Axios
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -120,6 +119,7 @@ class Home extends Component {
       // In this return I have pulled in all the componants
       <div className="App">
         <Navbar />
+
         {/* grabs server data from current state */}
         {this.state.serverData.display_name ? (
           <div>
@@ -138,7 +138,6 @@ class Home extends Component {
               handleChange={this.handleChange.bind(this)}
               placeholder={"e.g. My Favourites"}
             />
-
             <Public
               options={["all", "true", "false"]}
               name="publicSelected"
