@@ -1,6 +1,7 @@
 This project is hosted on [Heroku - My Music](https://my-music-playlist.herokuapp.com/).
 
-###My Music
+## My Music
+
 'My Music' is an application that pulls Data such as 'Playlists', 'Tracks' and 'Images' from spotifys official API database. The application Provides the user with an interactive feel by filtering their Spotify playlists & also viewing each individual song and its Popularity Rating.
 The application pulls in images of each playlist and displays them on the trackDetails page according to the corrosponding Playlist.
 The application uses a variety of different features & Components such as routes to create a more immerse feel by giving the user Navigation.

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-// ---Track Component---
+// ---Navbar Component---
 class Navbar extends Component {
   // Using Bootstrap to create a Navigation bar
   render() {
