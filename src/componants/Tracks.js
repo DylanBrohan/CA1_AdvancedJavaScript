@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 class Track extends Component {
   render() {
@@ -13,14 +14,23 @@ class Track extends Component {
             2. If there's only one artist, just reinitalise the variable to be that
                artist's name. The [0] is there to point to the first element of the
                array.
+
+// ---This functionality is used to concatinate if there are 2 artists for one track---
+
         */
     let artists = this.props.artists;
+    //  If there are more than one artist, reinitialise to be an empty string.
     if (artists.length > 0) {
       artists = "";
+      //  loop through the array and concatenate to the artists string.
       for (let i = 0; i < this.props.artists.length; i++) {
+        //  If there are more artists to loop through, append a comma. If not,
+        //  just add the name of the artist.
         if (i + 1 !== this.props.artists.length) {
           artists = artists.concat(this.props.artists[i].name + ", ");
         } else {
+          // If there's only one artist, just reinitalise the variable to be that
+          //      artist's name.
           artists = artists.concat(this.props.artists[i].name);
         }
       }
@@ -39,14 +49,14 @@ class Track extends Component {
           <br />
           <br />
           <button className="btn btn-secondary">
-            <a
+            <Link
               className="btn btn-secondary"
-              href={`/trackDetails#${this.props.id}&${
-                this.props.access_token
-              }&${this.props.playlistImg}`}
+              to={`/trackDetails#${this.props.id}&${this.props.access_token}&${
+                this.props.playlistImg
+              }`}
             >
               Details On: {this.props.name}
-            </a>
+            </Link>
           </button>
         </div>
       </div>

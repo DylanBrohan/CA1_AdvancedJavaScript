@@ -53,7 +53,7 @@ class Playlist extends Component {
       console.log(this.state.trackData[i].track);
       i++;
       return (
-        // Takes in the Track fields
+        // Props for each field
         <Track
           key={t.track.id}
           id={t.track.id}

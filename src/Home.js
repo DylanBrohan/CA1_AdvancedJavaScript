@@ -19,6 +19,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 // Main Routes File
 import "./App.css";
+import RadioButton from "./componants/RadioButton";
 
 // ---Access Token---
 // Needs to be refreshed every 3600 miliseconds
@@ -40,7 +41,7 @@ class Home extends Component {
     };
     // Binds the state of handle Change & Click
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -53,7 +54,7 @@ class Home extends Component {
           Authorization: "Bearer " + access_token
         }
       })
-      // Then Promise - serverData is then populated with the data
+      // Then  - serverData is then populated with the data
       .then(res => {
         console.log(res.data);
         this.setState({ serverData: res.data });
@@ -89,17 +90,21 @@ class Home extends Component {
     console.log(name);
   }
 
-  handleClick(event) {
-    // handle the toggle <button>
-    const name = event.target.name;
-    this.setState(prevState => ({ [name]: !prevState[name] }));
-  }
-
   // Render for playlist Data and playlist info
   render() {
+    const data =
+      this.state.sort === "no"
+        ? this.state.playlist
+        : [].concat(this.state.playlist).sort((a, b) => {
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+          });
+
     let playlistsRender =
       // if serverData state & playlistData state
-      // Else Filter playlistData & populate with the following
+      //  Filter playlistData & populate with the following
+      // else empty array
       this.state.serverData && this.state.playlistData
         ? this.state.playlistData.filter(playlistData =>
             playlistData.name
@@ -107,19 +112,19 @@ class Home extends Component {
               .includes(this.state.searchText.toLowerCase())
           )
         : [];
+    console.log(data);
 
-    // Maps playlistData to playlistRender
-    const playlistData = playlistsRender.map(pr => (
-      // --Playlist Component Fields--
+    let AlbumList = playlistsRender.map(playlist => (
       <Playlist
-        key={pr.id}
+        playlist={playlist}
+        key={playlist.id}
         access_token={access_token}
-        id={pr.id}
-        name={pr.name}
-        public={pr.public}
-        img={pr.images[0].url}
+        id={playlist.id}
+        name={playlist.name}
+        img={playlist.images[0].url}
       />
     ));
+
     return (
       // In this return I have pulled in all the componants
       <div className="App">
@@ -134,6 +139,7 @@ class Home extends Component {
               's Playlists
             </h1>
             {/* PlaylistRender is called  */}
+            {/* Dynamic Component */}
             <MusicCounter playlist={playlistsRender} />
             {/* Filter Component is called and values are set */}
             <Filter
@@ -151,17 +157,13 @@ class Home extends Component {
               selected={this.state.publicSelected}
             />
 
+            <RadioButton
+              handleChange={this.handleChange}
+              checked={this.state.sort}
+            />
+
+            {AlbumList}
             {/* Map Transforms the playlist array into a new Object */}
-            {playlistsRender.map(playlist => (
-              <Playlist
-                playlist={playlist}
-                key={playlist.id}
-                access_token={access_token}
-                id={playlist.id}
-                name={playlist.name}
-                img={playlist.images[0].url}
-              />
-            ))}
           </div>
         ) : (
           <div>

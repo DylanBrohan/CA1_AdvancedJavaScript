@@ -17,6 +17,9 @@ class TrackDetails extends Component {
     // Sets the state of trackDetails
     this.state = {
       // Splicing and Splitting access token & TrackId at pieces needed
+
+      // ID & Token are cut from the URL & this is set as their state.
+
       trackDetails: [],
       id: this.props.location.hash
         .substr(1)
@@ -57,12 +60,14 @@ class TrackDetails extends Component {
   }
 
   render() {
+    
     //   ---Checking for
     let artists =
       // TrackDetails state is set to artists
       this.state.trackDetails.artists;
     if (this.state.loading) {
       // If there is more than one artist Excecute
+      // as an empty string
       if (artists) {
         artists = "";
         for (let i = 0; i < this.state.trackDetails.artists.length; i++) {
@@ -82,10 +87,12 @@ class TrackDetails extends Component {
         artists = this.state.trackDetails.artists[0].name;
       }
     }
+
     // This is pointing to the part of the URL holding the playlist images Id
     let playlistImg = this.props.location.hash.substr(
       this.state.id.length + this.state.token.length + 3
     );
+
     console.log(playlistImg);
     return (
       // In this Return the Track data is displayed and styled
